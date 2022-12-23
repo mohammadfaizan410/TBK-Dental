@@ -1,3 +1,5 @@
+//--------------------------------imports--------------------------------------------------
+
 const bodyParser = require("body-parser");
 
 const express = require("express");
@@ -24,7 +26,7 @@ const dentist = require("./models/dentist");
 
 const clinic = require("./models/clinic");
 
-const appointmentModel = require("./models/appointment");
+const Appointments = require("./models/appointment");
 
 mongoose.set('strictQuery', false);
 
@@ -33,12 +35,14 @@ mongoose.connect("mongodb://127.0.0.1:27017/TBK_DB", { useNewUrlParser: true });
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
+app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
 
 app.set("view engine", "ejs");
 
 app.set("views", __dirname + "/views")
 
 const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("user")) : "";
+//-------------------------------------------------------------------------------------------
 
 //---------------------functions--------------------------------------------------------
 const { registerPatient } = require("./handlers/registerPatient");
@@ -123,12 +127,25 @@ app.get("dashboardDentist", (req, res) => {
 app.get("/logout", (req, res) => {
     if (localStorage.getItem("user")) {
         localStorage.clear();
-        res.render("index", {user: user});
+        res.render("index", {user: JSON.parse(localStorage.getItem("user"))});
     }
     else {
-        res.render("index",{user: user});
+        res.render("index",{user: JSON.parse(localStorage.getItem("user"))});
     }
 })
+
+app.get("/dashboardDentist", (req, res) => {
+    if (localStorage.getItem("user")) {
+        var currentUser = JSON.parse(localStorage.getItem("user"));
+        Appointments.find({ username: currentUser.usename }).then(result => {
+            res.render("dashboardDentist", { user: JSON.parse(localStorage.getItem("user")), result: result });
+        })
+    }
+    else {
+        res.render("index",{user: JSON.parse(localStorage.getItem("user"))});
+    }
+})
+
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------
 

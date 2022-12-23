@@ -157,3 +157,15 @@ body{
 		background:grey;
 		}
 /* ends here */
+
+/* dashboard styles */
+
+.dashboard-title{
+	color: rgb(110, 208, 235);
+}
+
+#appointments{
+	font-size: 30px;
+	color: rgb(110, 208, 235);
+	cursor: pointer;
+}

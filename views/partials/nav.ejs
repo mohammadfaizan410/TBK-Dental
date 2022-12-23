@@ -8,13 +8,13 @@
     <div class="navItem"><a href=""> KLİNİKLER</a></div>
     <%if(user){%>
       <%if(user.type==="patient"){%>
-        <div class="navItem"><a href="/patientDashboard"><%=user.username%></a></div>
+        <div class="navItem"><a href="/dashboardPatient"><%=user.username%></a></div>
      <% }%>
       <%if(user.type==="dentist"){%>
-        <div class="navItem"><a href="/dentistDashboard"><%=user.username%></a></div>
+        <div class="navItem"><a href="/dashboardDentist"><%=user.username%></a></div>
      <% }%>
       <%if(user.type==="admin"){%>
-        <div class="navItem"><a href="/adminDashboard"><%=user.username%></a></div>
+        <div class="navItem"><a href="/dashboardAdmin"><%=user.username%></a></div>
       <%}%>
       <div class="navItem"><a href="/logout">Logout</a></div>
     <%} else{%>
