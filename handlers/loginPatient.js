@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Patient = require("../models/dentist");
+const Patient = require("../models/patient");
 const bcrypt = require('bcrypt');
 
 const loginPatient = (req,res, error, currentUser, localStorage) => {

@@ -44,6 +44,7 @@ const user = localStorage.getItem("user") ? JSON.parse(localStorage.getItem("use
 const { registerPatient } = require("./handlers/registerPatient");
 const { registerDentist } = require("./handlers/registerDentist");
 const { loginDentist } = require("./handlers/loginDentist");
+const { loginPatient } = require("./handlers/loginPatient");
 //--------------------------------------------------------------------------------------
 
 //---------------------------------Errors-----------------------------------------------
@@ -143,7 +144,7 @@ app.post("/loginDentist", (req, res) => {
     loginDentist(req, res,loginError,user,localStorage);
 })
 app.post("/loginPatient", (req, res) => {
-    loginDentist(req, res,loginError,user,localStorage);
+    loginPatient(req, res,loginError,user,localStorage);
 })
 //---------------------------------------------------------------------------------------
 
