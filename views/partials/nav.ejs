@@ -1,0 +1,32 @@
+<%- include("./header.ejs") %>
+<div class="navbar">
+  <div class="title"><a href="/">TBK BİLİŞİM</a></div>
+  
+  <div class="nav-Items">
+    <div class="navItem"><a href="/">ANA SAYFA</a></div>
+    <div class="navItem"><a href="/services"> HİZMETLER</a></div>
+    <div class="navItem"><a href=""> KLİNİKLER</a></div>
+    <%if(user){%>
+      <%if(user.type==="patient"){%>
+        <div class="navItem"><a href="/patientDashboard"><%=user.username%></a></div>
+     <% }%>
+      <%if(user.type==="dentist"){%>
+        <div class="navItem"><a href="/dentistDashboard"><%=user.username%></a></div>
+     <% }%>
+      <%if(user.type==="admin"){%>
+        <div class="navItem"><a href="/adminDashboard"><%=user.username%></a></div>
+      <%}%>
+      <div class="navItem"><a href="/logout">Logout</a></div>
+    <%} else{%>
+      <div class="navItem"><a href="/loginOptions">Login!</a></div>
+  <%}%> 
+  </div>
+</div>
+  <div class="mobile-nav">
+      <div class="title"><a href="/">TBK BİLİŞİM</a></div>
+      <div class="navItem"><a href="/">ANA SAYFA</a></div>
+      <div class="navItem"><a href="/services">HİZMETLER</a></div>
+      <div class="navItem"><a href="">KLİNİKLER</a></div>
+      <div class="navItem"><a href="/loginOptions"><%= user ? user.username : "Login" %></a></div>
+      
+  </div>
