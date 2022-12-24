@@ -57,7 +57,7 @@ var loginError = "";
 localStorage.clear();
 
 // -----------------get routes----------------------------------------------------------
-//main page
+//--------------------------------------------------------------------------------------
 app.get("/", (req, res) => {  
         res.render("index", {user: JSON.parse(localStorage.getItem("user"))})
 })
@@ -134,7 +134,7 @@ app.get("/logout", (req, res) => {
 app.get("/dashboardDentist", (req, res) => {
     if (localStorage.getItem("user")) {
         var currentUser = JSON.parse(localStorage.getItem("user"));
-        Appointments.find({ username: currentUser.usename }).then(result => {
+        Appointments.find({ dentist: currentUser.username }).then(result => {
             res.render("dashboardDentist", { user: JSON.parse(localStorage.getItem("user")), result: result });
         })
     }
@@ -181,7 +181,7 @@ app.get("/appointment", (req, res) => {
 //---------------------------------------------------------------------------------------
 
 //--------------post routes -------------------------------------------------------------
-
+//---------------------------------------------------------------------------------------
 app.post("/registerPatient", (req, res) => {
     registerPatient(req,res,user,registerErrorPatient,localStorage);
 });
@@ -195,7 +195,7 @@ app.post("/loginPatient", (req, res) => {
     loginPatient(req, res,loginError,user,localStorage);
 })
 //---------------------------------------------------------------------------------------
-
+//---------------------------------------------------------------------------------------
 app.listen(port || process.env.PORT, () => {
     console.log("the server is up and running!");
 });
