@@ -14,8 +14,6 @@ const mongoose = require("mongoose");
 
 const bcrypt = require('bcrypt');
 
-const { json } = require("body-parser");
-
 const saltRounds = 10;
 
 var localStorage = new LocalStorage("./scratch");
@@ -24,7 +22,7 @@ const patient = require("./models/patient");
 
 const dentist = require("./models/dentist");
 
-const clinic = require("./models/clinic");
+const Clinics = require("./models/clinic");
 
 const Appointments = require("./models/appointment");
 
@@ -34,8 +32,7 @@ mongoose.connect("mongodb://127.0.0.1:27017/TBK_DB", { useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static("public"));
-app.use('/jquery', express.static(__dirname + '/node_modules/jquery/dist/'));
+app.use("/public", express.static(__dirname + "/public"));
 
 app.set("view engine", "ejs");
 
@@ -144,6 +141,35 @@ app.get("/dashboardDentist", (req, res) => {
     else {
         res.render("index",{user: JSON.parse(localStorage.getItem("user"))});
     }
+})
+
+app.get("/clinics", (req, res) => {
+    Clinics.find({}).then(clinics => {
+        res.render("clinics", { user: JSON.parse(localStorage.getItem("user")), clinics : clinics});
+    })
+})
+
+app.get("/clinicDetails", (req, res) => {
+    const title = req.query.title;
+    Clinics.findOne({ title: title }).then(clinic => {
+        if (!clinic) {
+            res.render("Clinic does not exist!");
+        }
+        else {
+            res.render("clinicDetails", {user : JSON.parse(localStorage.getItem("user")), clinic : clinic})
+        }
+    })
+})
+app.get("/appointment", (req, res) => {
+    const title = req.query.title;
+    Clinics.findOne({ title: title }).then(clinic => {
+        if (!clinic) {
+            res.render("Clinic does not exist!");
+        }
+        else {
+            res.render("appointment", {user : JSON.parse(localStorage.getItem("user")), clinic : clinic})
+        }
+    })
 })
 
 //---------------------------------------------------------------------------------------

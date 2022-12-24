@@ -169,3 +169,7 @@ body{
 	color: rgb(110, 208, 235);
 	cursor: pointer;
 }
+
+.direction{
+	color: black;
+}

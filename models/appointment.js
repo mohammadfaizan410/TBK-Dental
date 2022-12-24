@@ -7,7 +7,9 @@ const appointmentSchema = new mongoose.Schema({
 
     dentist: String,
 
-    status: String
+    status: String,
+    
+    clinic: String,
 
 });
 

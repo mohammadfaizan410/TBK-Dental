@@ -2,10 +2,6 @@
 const mongoose = require("mongoose");
 
 clinicSchema = new mongoose.Schema({
-        CID: {
-            type: Number,
-            // required : true
-        },
         title: {
             type: String,
             // required : true
@@ -32,4 +28,4 @@ clinicSchema = new mongoose.Schema({
     ]
 })
 
-exports.clinicModel = new mongoose.model("clinic", clinicSchema);
+module.exports = Clinics = new mongoose.model("clinic", clinicSchema);

@@ -1,0 +1,31 @@
+<%-include("./partials/nav.ejs")%>
+
+<div class="container container-fluid">
+    <div class="album py-5 bg-light">
+        <div class="container">
+          <div class="row">
+            <%for(const clinic of clinics){%>
+                <div class="col-md-4">
+                    <div class="card mb-4 box-shadow">
+                        <img class="card-img-top"  style="height: 225px; width: 100%; display: block;" src=<%=clinic.cover_img%>>
+                        <div class="card-body">
+                            <h5><%=clinic.title%></h5>
+                            <p class="card-text"><%=clinic.description%></p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                    <a href="/clinicDetails?title=<%=clinic.title%>" type="button" class="btn btn-sm btn-outline-secondary">View</a>
+                                    <%if(user &&  user.type==="admin"){%>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                   <%}%>
+                                </div>
+                                <small class="text-muted"><%=clinic.address%></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <%}%>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
