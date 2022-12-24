@@ -145,7 +145,12 @@ app.get("/dashboardDentist", (req, res) => {
 
 app.get("/clinics", (req, res) => {
     Clinics.find({}).then(clinics => {
-        res.render("clinics", { user: JSON.parse(localStorage.getItem("user")), clinics : clinics});
+        if (!clinics) {
+            res.send("No clinics to show!");
+        }
+        else {   
+            res.render("clinics", { user: JSON.parse(localStorage.getItem("user")), clinics : clinics});
+        }
     })
 })
 
@@ -153,7 +158,7 @@ app.get("/clinicDetails", (req, res) => {
     const title = req.query.title;
     Clinics.findOne({ title: title }).then(clinic => {
         if (!clinic) {
-            res.render("Clinic does not exist!");
+            res.send("Clinic does not exist!");
         }
         else {
             res.render("clinicDetails", {user : JSON.parse(localStorage.getItem("user")), clinic : clinic})
