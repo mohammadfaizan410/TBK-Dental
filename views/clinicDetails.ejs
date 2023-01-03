@@ -13,7 +13,9 @@
                             <p class="card-text"><%=clinic.description%></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
+                                 <% if(user && user.type === "patient") {%>
                                     <a href="/appointment?title=<%=clinic.title%>" class="btn btn-lg btn-outline-secondary">Get Appointment!</a>
+                                <%}%>
                                 </div>
                                 <small class="text-muted"><%=clinic.address%></small>
                             </div>
