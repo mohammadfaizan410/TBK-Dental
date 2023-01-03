@@ -16,8 +16,9 @@
                     <%for(const appt of result){%>
                         <div class="card col-lg-4 m-2" style="width: 18rem;">
                             <div class="card-body">
-                                <h5 class="card-title"><%=appt.patient%></h5>
-                                <p class="card-text"><%=appt.date%></p>
+                                <h5 class="card-title">Name: <%=appt.patient.first_name%></h5>
+                                <h5 class="card-title">Surname: <%=appt.patient.last_name%></h5>
+                                <p class="card-text">Date: <%=appt.date%></p>
                                 <a href="#" class="btn btn-secondary"><%=appt.status%></a>
                             </div>
                         </div>

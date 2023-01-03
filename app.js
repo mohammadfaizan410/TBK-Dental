@@ -143,6 +143,18 @@ app.get("/dashboardDentist", (req, res) => {
         res.render("index",{user: JSON.parse(localStorage.getItem("user"))});
     }
 })
+app.get("/dashboardPatient", (req, res) => {
+    if (localStorage.getItem("user")) {
+        var currentUser = JSON.parse(localStorage.getItem("user"));
+        Appointments.find({  'patient.username'  : currentUser.username }).then(result => {
+            console.log(result)
+            res.render("dashboardPatient", { user: JSON.parse(localStorage.getItem("user")), result: result });
+        })
+    }
+    else {
+        res.render("index",{user: JSON.parse(localStorage.getItem("user"))});
+    }
+})
 
 app.get("/clinics", (req, res) => {
     Clinics.find({}).then(clinics => {
