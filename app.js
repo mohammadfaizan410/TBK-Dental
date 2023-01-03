@@ -46,6 +46,7 @@ const { registerPatient } = require("./handlers/registerPatient");
 const { registerDentist } = require("./handlers/registerDentist");
 const { loginDentist } = require("./handlers/loginDentist");
 const { loginPatient } = require("./handlers/loginPatient");
+const { getAppointment } = require("./handlers/getAppointment");
 //--------------------------------------------------------------------------------------
 
 //---------------------------------Errors-----------------------------------------------
@@ -169,12 +170,19 @@ app.get("/appointment", (req, res) => {
     const title = req.query.title;
     Clinics.findOne({ title: title }).then(clinic => {
         if (!clinic) {
-            res.render("Clinic does not exist!");
+            res.render();
         }
         else {
+            if (!JSON.parse(localStorage.getItem("user"))) {
+                res.render("loginOptions");
+            }
             res.render("appointment", {user : JSON.parse(localStorage.getItem("user")), clinic : clinic})
         }
     })
+})
+
+app.get("/services", (req, res) => {
+    res.render("services", {user : JSON.parse(localStorage.getItem("user"))});
 })
 
 //---------------------------------------------------------------------------------------
@@ -193,6 +201,10 @@ app.post("/loginDentist", (req, res) => {
 })
 app.post("/loginPatient", (req, res) => {
     loginPatient(req, res,loginError,user,localStorage);
+})
+app.post("/appointment", (req, res) => {
+    getAppointment(req, res, JSON.parse(localStorage.getItem("user")));
+    res.render("appointmentSuccessfull");
 })
 //---------------------------------------------------------------------------------------
 //---------------------------------------------------------------------------------------

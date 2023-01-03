@@ -33,8 +33,8 @@ dentistSchema = new mongoose.Schema({
         required: true
     },
     completion_date: {
-        type: String,
-        required: true
+        type: Date,
+         required: true
     },
     clinics: [
         {

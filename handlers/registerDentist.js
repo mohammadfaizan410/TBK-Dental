@@ -24,7 +24,6 @@ const registerDentist = (req, res, currentUser, registerError,localStorage) => {
                     type: "dentist"
                 });
                 newDentist.save();
-
                 res.render("index", {user : localStorage.getItem("user")})
             });
         }
